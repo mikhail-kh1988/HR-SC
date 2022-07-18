@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ApplicantService implements IApplicantService {
@@ -20,7 +22,7 @@ public class ApplicantService implements IApplicantService {
     private VacancyService vacancyService;
 
     @Override
-    public ResponseDto registration(ApplicantDto dto) {
+    public void registration(ApplicantDto dto) {
         Applicant applicant = new Applicant();
 
         applicant.setFullName(dto.getFullName());
@@ -34,6 +36,61 @@ public class ApplicantService implements IApplicantService {
 
         repository.save(applicant);
 
-        return new ResponseDto("Регистрация прошла успешно.");
+    }
+
+    @Override
+    public List<Applicant> getAllApplicants() {
+        List<Applicant> applicants = new ArrayList<>();
+
+        for (Applicant a: repository.findAll()) {
+            applicants.add(a);
+        }
+
+        return applicants;
+    }
+
+    @Override
+    public List<Applicant> getNotViewedApplicant() {
+        return repository.findByViewed(false);
+    }
+
+    @Override
+    public List<Applicant> getApplicantByVacancyId(long vacancyId) {
+        return repository.findByVacancyID(vacancyId);
+    }
+
+    @Override
+    public void applicantIsViewed(long applicantId) {
+        Applicant applicant = repository.findById(applicantId).get();
+
+        applicant.setViewed(true);
+
+        repository.save(applicant);
+    }
+
+    @Override
+    public Applicant getApplicantById(long id) {
+        return repository.findById(id).get();
+    }
+
+    @Override
+    public void applyApplicant(long id) {
+        Applicant applicant = repository.findById(id).get();
+
+        applicant.setApplied(true);
+
+        repository.save(applicant);
+    }
+
+    @Override
+    public ResponseDto getStatusApplicant(long id) {
+        Applicant applicant = repository.findById(id).get();
+
+        if (applicant.getApplied()){
+            return new ResponseDto("Поздравляем вы приняты! За дополнительной информацией обращайтесь в HR");
+        } else if(applicant.getViewed()){
+            return new ResponseDto("Ваше резюме просмотрено.");
+        }
+        return new ResponseDto("Ваше резюме пока не просмотрено.");
     }
 }
