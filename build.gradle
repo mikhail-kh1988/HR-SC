@@ -2,7 +2,15 @@ plugins {
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	//id "org.flywaydb.flyway" version "9.0.1"
 }
+
+/*
+project.ext['flyway.user']='hr'
+project.ext['flyway.password']='hr'
+project.ext['flyway.schemas']='hr'
+*/
+
 
 group = 'com.hr'
 version = '0.0.1'
@@ -22,14 +30,21 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation "org.flywaydb:flyway-core:9.0.1"
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
+
+/*flyway {
+	url = 'jdbc:postgresql://localhost:5432/hr'
+	user = 'hr'
+	password = 'hr'
+}*/
 
 tasks.named('test') {
 	useJUnitPlatform()
