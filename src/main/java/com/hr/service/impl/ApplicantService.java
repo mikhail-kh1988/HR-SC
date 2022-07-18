@@ -5,6 +5,8 @@ import com.hr.dto.ResponseDto;
 import com.hr.entity.Applicant;
 import com.hr.repository.ApplicantRepository;
 import com.hr.service.IApplicantService;
+import com.hr.service.IPersonService;
+import com.hr.service.IVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,10 @@ public class ApplicantService implements IApplicantService {
     private ApplicantRepository repository;
 
     @Autowired
-    private VacancyService vacancyService;
+    private IVacancyService vacancyService;
+
+    @Autowired
+    private IPersonService personService;
 
     @Override
     public void registration(ApplicantDto dto) {
@@ -80,6 +85,8 @@ public class ApplicantService implements IApplicantService {
         applicant.setApplied(true);
 
         repository.save(applicant);
+
+        personService.createPersonByApplicant(applicant);
     }
 
     @Override

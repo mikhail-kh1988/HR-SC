@@ -9,4 +9,5 @@ public class VacancyDto {
 
     private String shortName;
     private String description;
+    private int grade;
 }

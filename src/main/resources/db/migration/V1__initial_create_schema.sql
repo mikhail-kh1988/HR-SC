@@ -20,7 +20,8 @@ create table files(
 create table vacancies(
 	id serial primary key not null,
 	short_name varchar(128),
-	description text
+	description text,
+	grade int
 );
 
 create table persons(
@@ -37,7 +38,7 @@ create table persons(
 	create_date timestamp,
 	status int,
 	user_id bigint,
-	prsons_doc_id bigint,
+	document_id bigint,
 	organisation_tier_id bigint
 );
 

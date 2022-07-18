@@ -23,6 +23,7 @@ public class VacancyService implements IVacancyService {
 
         vacancy.setShortName(dto.getShortName());
         vacancy.setDescription(dto.getDescription());
+        vacancy.setGrade(dto.getGrade());
 
         return repository.save(vacancy).getID();
 

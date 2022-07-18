@@ -18,5 +18,6 @@ public class Vacancy {
     @Column(name = "short_name")
     private String shortName;
     private String description;
+    private int grade;
 
 }
