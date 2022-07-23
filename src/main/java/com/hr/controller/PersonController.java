@@ -46,4 +46,10 @@ public class PersonController {
     public ResponseEntity<List<Person>> getPersonsByJobTitle(@PathVariable String job){
         return ResponseEntity.ok(personService.getPersonByJobTitle(job));
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Person> getPersonsByEmail(@PathVariable String email){
+        return ResponseEntity.ok(personService.getPersonByEmail(email));
+    }
+
 }

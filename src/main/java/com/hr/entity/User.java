@@ -1,5 +1,6 @@
 package com.hr.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,8 @@ public class User {
     private Long ID;
 
     private String login;
+
+    @JsonIgnore
     private String password;
 
     @Column(name = "create_date")
