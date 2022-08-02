@@ -3,9 +3,11 @@ package com.hr.service.impl;
 import com.hr.dto.PersonDto;
 import com.hr.entity.Applicant;
 import com.hr.entity.Person;
+import com.hr.entity.User;
 import com.hr.entity.Vacancy;
 import com.hr.repository.PersonRepository;
 import com.hr.service.IPersonService;
+import com.hr.service.IUserService;
 import com.hr.service.IVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class PersonService implements IPersonService {
 
     @Autowired
     private IVacancyService vacancyService;
+
+    @Autowired
+    private IUserService userService;
 
     @Override
     public void createPersonByApplicant(Applicant applicant) {
@@ -121,6 +126,15 @@ public class PersonService implements IPersonService {
         person.setJobTitle(vacancy.getShortName());
 
         repository.save(person);
+    }
+
+    @Override
+    public void createLoginForPerson(long personId) {
+
+        Person person = repository.findById(personId).get();
+
+        userService.createUserFromPerson(person);
+
     }
 
 }
