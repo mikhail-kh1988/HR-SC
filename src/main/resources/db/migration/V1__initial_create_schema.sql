@@ -66,4 +66,15 @@ create table users(
 	password varchar(256),
 	create_date timestamp,
 	status int
-)
+);
+
+create table department(
+	id serial primary key not null,
+	dep_name varchar(255),
+	is_sub_dep bool,
+	sub_dep_id bigint,
+	description text,
+	create_date timestamp,
+	created_by bigint
+
+);
