@@ -6,4 +6,5 @@ import com.hr.entity.Applicant;
 public interface IRedmineService {
 
     void createNewIssue(Applicant applicant);
+    void updateIssue(int issueId);
 }

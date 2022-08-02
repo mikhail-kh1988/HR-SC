@@ -44,4 +44,9 @@ public class RedmineService implements IRedmineService {
 
         client.createNewIssue(issueBody);
     }
+
+    @Override
+    public void updateIssue(int issueId) {
+
+    }
 }
