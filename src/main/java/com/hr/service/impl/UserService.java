@@ -26,6 +26,7 @@ public class UserService implements IUserService {
         String[] email = person.getEmail().split("@");
 
         user.setLogin(email[0]+"_"+person.getID());
+        user.setPassword("12345");
         repository.save(user);
     }
 
