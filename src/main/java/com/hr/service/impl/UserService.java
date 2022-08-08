@@ -1,8 +1,12 @@
 package com.hr.service.impl;
 
+import com.hr.dto.PersonDto;
 import com.hr.entity.Person;
 import com.hr.entity.User;
+import com.hr.repository.PersonRepository;
 import com.hr.repository.UserRepository;
+import com.hr.service.IPersonService;
+import com.hr.service.IRedmineService;
 import com.hr.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,9 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Override
     public void createUserFromPerson(Person person) {
         User user = new User();
@@ -27,7 +34,9 @@ public class UserService implements IUserService {
 
         user.setLogin(email[0]+"_"+person.getID());
         user.setPassword("12345");
-        repository.save(user);
+        User savedUser = repository.save(user);
+        person.setUser(savedUser);
+        personRepository.save(person);
     }
 
     @Override

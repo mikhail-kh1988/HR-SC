@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
-public class Root{
+public class IssuesIntegration {
     private ArrayList<Issue> issues;
     private int total_count;
     private int offset;

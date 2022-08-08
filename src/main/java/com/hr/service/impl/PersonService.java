@@ -7,6 +7,7 @@ import com.hr.entity.User;
 import com.hr.entity.Vacancy;
 import com.hr.repository.PersonRepository;
 import com.hr.service.IPersonService;
+import com.hr.service.IRedmineService;
 import com.hr.service.IUserService;
 import com.hr.service.IVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class PersonService implements IPersonService {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IRedmineService redmineService;
 
     @Override
     public void createPersonByApplicant(Applicant applicant) {
@@ -134,6 +138,13 @@ public class PersonService implements IPersonService {
         Person person = repository.findById(personId).get();
 
         userService.createUserFromPerson(person);
+
+        try {
+
+            redmineService.createNewUser(person);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

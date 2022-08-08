@@ -1,19 +1,18 @@
 package com.hr.service.impl;
 
+import com.hr.client.RedmineAdminClient;
 import com.hr.client.RedmineClient;
 import com.hr.dto.redmine.request.Issue;
 import com.hr.dto.redmine.request.IssueBodyRequest;
 import com.hr.dto.redmine.user.RequestCreateUserDto;
-import com.hr.dto.redmine.resplist.Root;
+import com.hr.dto.redmine.resplist.IssuesIntegration;
 import com.hr.dto.redmine.response.IssueBodyResponse;
 import com.hr.entity.Applicant;
 import com.hr.entity.Person;
-import com.hr.entity.User;
+import com.hr.entity.TaskIssue;
 import com.hr.service.IRedmineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class RedmineService implements IRedmineService {
@@ -21,6 +20,9 @@ public class RedmineService implements IRedmineService {
 
     @Autowired
     private RedmineClient client;
+
+    @Autowired
+    private RedmineAdminClient adminClient;
 
     @Override
     public void createNewIssue(Applicant applicant) {
@@ -53,7 +55,7 @@ public class RedmineService implements IRedmineService {
     }
 
     @Override
-    public void updateIssue(int issueId) {
+    public void updateIssue(int issueId, TaskIssue issues) {
 
         IssueBodyRequest request = new IssueBodyRequest();
         Issue issue = new Issue();
@@ -78,9 +80,9 @@ public class RedmineService implements IRedmineService {
 
     //TODO Настроить чтобы можно было получать списки ISSUE.
     @Override
-    public List<Root> getIssueByIntegration() {
+    public IssuesIntegration getIssueByIntegration() {
 
-        List<Root> list = null;
+        IssuesIntegration list = null;
 
         try {
 
@@ -110,6 +112,6 @@ public class RedmineService implements IRedmineService {
 
         dto.setUser(user);
 
-        client.createNewUser(dto);
+        adminClient.createNewUser(dto);
     }
 }
