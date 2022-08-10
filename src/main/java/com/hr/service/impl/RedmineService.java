@@ -11,12 +11,12 @@ import com.hr.entity.Applicant;
 import com.hr.entity.Person;
 import com.hr.entity.TaskIssue;
 import com.hr.service.IRedmineService;
+import com.hr.service.IVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RedmineService implements IRedmineService {
-
 
     @Autowired
     private RedmineClient client;
@@ -57,12 +57,15 @@ public class RedmineService implements IRedmineService {
     @Override
     public void updateIssue(int issueId, TaskIssue issues) {
 
+        IssueBodyResponse issueResponse = client.getIssueByID(issueId);
+
         IssueBodyRequest request = new IssueBodyRequest();
         Issue issue = new Issue();
-        issue.setStatus_id(4);
-        issue.setPriority_id(2);
+        issue.setStatus_id(3);
+        issue.setPriority_id(issueResponse.getIssue().getPriority().getId());
         issue.setCategory_id(5);
-        issue.setSubject("issue is changed!");
+        issue.setSubject(issueResponse.getIssue().getSubject());
+        issue.setDescription(issueResponse.getIssue().getDescription());
 
         request.setIssue(issue);
         try {
@@ -78,7 +81,6 @@ public class RedmineService implements IRedmineService {
         return client.getIssueByID(id);
     }
 
-    //TODO Настроить чтобы можно было получать списки ISSUE.
     @Override
     public IssuesIntegration getIssueByIntegration() {
 
