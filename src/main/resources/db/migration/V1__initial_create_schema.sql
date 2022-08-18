@@ -78,3 +78,11 @@ create table department(
 	created_by bigint
 
 );
+
+create TABLE persons_history(
+	id Serial PRIMARY KEY not null,
+	person_id BIGINT,
+	create_date TIMESTAMP,
+	create_by VARCHAR(128),
+	operation varchar(1024)
+);

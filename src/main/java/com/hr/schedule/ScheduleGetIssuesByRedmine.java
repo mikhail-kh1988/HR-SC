@@ -12,7 +12,7 @@ public class ScheduleGetIssuesByRedmine {
 
     @Autowired
     private IVacancyService vacancyService;
-
+    
     @Autowired
     private IRedmineService redmineService;
 

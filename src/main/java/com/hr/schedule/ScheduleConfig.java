@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class ScheduleConfig {
 
-    @Bean
+    /*@Bean
     public ScheduleGetIssuesByRedmine getIssuesByRedmine(){
         return new ScheduleGetIssuesByRedmine();
-    }
+    }*/
 }
