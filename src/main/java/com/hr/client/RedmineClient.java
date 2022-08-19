@@ -20,4 +20,6 @@ public interface RedmineClient {
     @PutMapping("/issues/{id}.json")
     void updateIssue(@PathVariable int id, @RequestBody IssueBodyRequest request);
 
+
+
 }

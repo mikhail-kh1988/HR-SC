@@ -17,6 +17,6 @@ public interface IPersonService {
     Person getPersonById(long id);
     Person getPersonByEmail(String email);
     void setPersonGradeByVacancy(long vacancyId, long personId);
-    void createLoginForPerson(long personId);
+    //void createLoginForPerson(long personId);
 
 }

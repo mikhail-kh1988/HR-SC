@@ -2,7 +2,9 @@ package com.hr.client;
 
 import com.hr.dto.redmine.user.RequestCreateUserDto;
 import com.hr.dto.redmine.user.response.ResponseCreateUserDto;
+import com.hr.dto.redmine.user.response.ResponseGetUsers;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -11,4 +13,8 @@ public interface RedmineAdminClient {
 
     @PostMapping("/users.json")
     ResponseCreateUserDto createNewUser(@RequestBody RequestCreateUserDto dto);
+
+    @GetMapping("/users.json")
+    ResponseGetUsers getAllUsers();
+
 }

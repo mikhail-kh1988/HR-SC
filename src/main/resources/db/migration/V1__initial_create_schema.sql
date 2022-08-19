@@ -86,3 +86,27 @@ create TABLE persons_history(
 	create_by VARCHAR(128),
 	operation varchar(1024)
 );
+
+
+create table documents_type(
+  id Serial not null primary key,
+  name varchar(256),
+  prefix varchar(32),
+  create_date timestamp,
+  user_id bigint
+);
+
+
+create table documents(
+  id Serial not null primary key,
+  name varchar(256),
+  prefix varchar(32),
+  external_id varchar(256),
+  document_type_id bigint,
+  document_body text,
+  create_date timestamp,
+  modify_date timestamp,
+  version varchar(128),
+  person_id bigint,
+  user_id bigint
+);

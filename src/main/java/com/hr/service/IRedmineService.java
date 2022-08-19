@@ -6,6 +6,7 @@ import com.hr.dto.redmine.resplist.IssuesIntegration;
 import com.hr.entity.Applicant;
 import com.hr.entity.Person;
 import com.hr.entity.TaskIssue;
+import java.util.List;
 
 public interface IRedmineService {
 
@@ -16,4 +17,6 @@ public interface IRedmineService {
     IssuesIntegration getIssueByIntegration();
 
     void createNewUser(Person person);
+
+    List<Person> getPersonFromRedmine();
 }

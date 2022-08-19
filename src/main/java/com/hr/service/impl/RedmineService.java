@@ -7,13 +7,19 @@ import com.hr.dto.redmine.request.IssueBodyRequest;
 import com.hr.dto.redmine.user.RequestCreateUserDto;
 import com.hr.dto.redmine.resplist.IssuesIntegration;
 import com.hr.dto.redmine.response.IssueBodyResponse;
+import com.hr.dto.redmine.user.response.ResponseGetUsers;
+import com.hr.dto.redmine.user.response.User;
 import com.hr.entity.Applicant;
 import com.hr.entity.Person;
 import com.hr.entity.TaskIssue;
+import com.hr.service.IPersonService;
 import com.hr.service.IRedmineService;
 import com.hr.service.IVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RedmineService implements IRedmineService {
@@ -23,6 +29,9 @@ public class RedmineService implements IRedmineService {
 
     @Autowired
     private RedmineAdminClient adminClient;
+
+    @Autowired
+    private IPersonService personService;
 
     @Override
     public void createNewIssue(Applicant applicant) {
@@ -115,5 +124,21 @@ public class RedmineService implements IRedmineService {
         dto.setUser(user);
 
         adminClient.createNewUser(dto);
+    }
+
+    @Override
+    public List<Person> getPersonFromRedmine() {
+        ArrayList<Person> people = new ArrayList<>();
+
+        ResponseGetUsers allUsers = adminClient.getAllUsers();
+        for (User userRedmine: allUsers.getUsers()) {
+            if (userRedmine.getMail() != null & personService.getPersonByEmail(userRedmine.getMail()) != null){
+                Person person = personService.getPersonByEmail(userRedmine.getMail());
+                people.add(person);
+            }
+        }
+
+
+        return people;
     }
 }

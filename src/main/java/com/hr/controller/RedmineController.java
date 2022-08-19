@@ -34,5 +34,10 @@ public class RedmineController {
         return ResponseEntity.ok("OK");
     }
 
+    @GetMapping("/getUsers")
+    public ResponseEntity<?> getUsers(){
+        return ResponseEntity.ok(redmineService.getPersonFromRedmine());
+    }
+
 
 }
