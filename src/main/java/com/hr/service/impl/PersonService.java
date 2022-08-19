@@ -29,8 +29,8 @@ public class PersonService implements IPersonService {
     @Autowired
     private IUserService userService;
 
-    @Autowired
-    private IRedmineService redmineService;
+    /*@Autowired
+    private IRedmineService redmineService;*/
 
     @Override
     public void createPersonByApplicant(Applicant applicant) {
@@ -132,7 +132,7 @@ public class PersonService implements IPersonService {
         repository.save(person);
     }
 
-    @Override
+    /*@Override
     public void createLoginForPerson(long personId) {
 
         Person person = repository.findById(personId).get();
@@ -146,6 +146,6 @@ public class PersonService implements IPersonService {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 }

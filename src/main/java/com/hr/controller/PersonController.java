@@ -52,10 +52,10 @@ public class PersonController {
         return ResponseEntity.ok(personService.getPersonByEmail(email));
     }
 
-    @GetMapping("/create/{id}/login")
+    /*@GetMapping("/create/{id}/login")
     public ResponseEntity<ResponseDto> createLoginForPersonId(@PathVariable long id){
         personService.createLoginForPerson(id);
         return ResponseEntity.ok(new ResponseDto("Логин для пользователя создан"));
-    }
+    }*/
 
 }
