@@ -3,12 +3,12 @@ package com.hr.service.impl;
 import com.hr.dto.ApplicantDto;
 import com.hr.dto.ResponseDto;
 import com.hr.entity.Applicant;
+import com.hr.exception.NotFoundApplicantException;
 import com.hr.repository.ApplicantRepository;
 import com.hr.service.IApplicantService;
 import com.hr.service.IPersonService;
 import com.hr.service.IRedmineService;
 import com.hr.service.IVacancyService;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Log4j
 @Service
 public class ApplicantService implements IApplicantService {
 
@@ -28,9 +27,6 @@ public class ApplicantService implements IApplicantService {
 
     @Autowired
     private IPersonService personService;
-
-    @Autowired
-    private IRedmineService redmineService;
 
     @Override
     public void registration(ApplicantDto dto) {
@@ -46,7 +42,6 @@ public class ApplicantService implements IApplicantService {
         applicant.setApplied(false);
 
         repository.save(applicant);
-        redmineService.createNewIssue(applicant);
 
     }
 
@@ -62,7 +57,7 @@ public class ApplicantService implements IApplicantService {
     }
 
     @Override
-    public List<Applicant> getNotViewedApplicant() {
+    public List<Applicant> getNotViewedApplicant(){
         return repository.findByViewed(false);
     }
 

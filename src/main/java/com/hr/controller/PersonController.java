@@ -1,8 +1,10 @@
 package com.hr.controller;
 
+import com.hr.dto.AllDocumentDto;
 import com.hr.dto.PersonDto;
 import com.hr.dto.ResponseDto;
 import com.hr.entity.Person;
+import com.hr.entity.PersonDocument;
 import com.hr.service.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +52,17 @@ public class PersonController {
     @GetMapping("/email/{email}")
     public ResponseEntity<Person> getPersonsByEmail(@PathVariable String email){
         return ResponseEntity.ok(personService.getPersonByEmail(email));
+    }
+
+    @PostMapping("/{id}/document/add")
+    public ResponseEntity<ResponseDto> addDocuments(@PathVariable long id, @RequestBody AllDocumentDto dto){
+        personService.addDocumentForPerson(id, dto);
+        return ResponseEntity.ok(new ResponseDto("ok"));
+    }
+
+    @GetMapping("/{personId}/document")
+    public ResponseEntity<PersonDocument> getPersonDocuments(@PathVariable long personId){
+        return ResponseEntity.ok(personService.getPersonById(personId).getDocument());
     }
 
     /*@GetMapping("/create/{id}/login")

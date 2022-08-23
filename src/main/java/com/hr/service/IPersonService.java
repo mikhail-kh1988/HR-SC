@@ -1,5 +1,6 @@
 package com.hr.service;
 
+import com.hr.dto.AllDocumentDto;
 import com.hr.dto.PersonDto;
 import com.hr.entity.Applicant;
 import com.hr.entity.Person;
@@ -18,5 +19,6 @@ public interface IPersonService {
     Person getPersonByEmail(String email);
     void setPersonGradeByVacancy(long vacancyId, long personId);
     //void createLoginForPerson(long personId);
+    void addDocumentForPerson(Long personId, AllDocumentDto dto);
 
 }

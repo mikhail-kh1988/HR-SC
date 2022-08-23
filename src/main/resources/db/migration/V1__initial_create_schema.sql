@@ -47,7 +47,8 @@ create table persons_documents(
 	passport_id bigint,
 	snils_id bigint,
 	insurance_id bigint,
-	work_book_id bigint
+	current_grade bigint,
+	redmine_id bigint
 );
 
 create table organisation_tier(
@@ -109,4 +110,38 @@ create table documents(
   version varchar(128),
   person_id bigint,
   user_id bigint
+);
+
+create table payroll(
+  id Serial primary key not null,
+  full_name varchar(256),
+  job_title varchar(256),
+  grade integer,
+  start_period date,
+  end_period date,
+  document_name varchar(256),
+  document_external_id varchar(256),
+  total_sum decimal,
+  tax decimal,
+  actual_sum decimal
+);
+
+create table snils(
+  id Serial primary key not null,
+  fio varchar(256),
+  birth_day date,
+  sex varchar(32),
+  snils_id varchar(16)
+);
+
+create table passport(
+  id Serial primary key not null,
+  serial integer,
+  number integer,
+  fio varchar(256),
+  who_get varchar(256),
+  date_of_get date,
+  sex char,
+  birth_day date,
+  place_birth varchar(256)
 );
