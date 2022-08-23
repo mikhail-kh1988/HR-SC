@@ -1,13 +1,10 @@
 package com.hr.service.impl;
 
+import com.hr.dto.AllDocumentDto;
 import com.hr.dto.PersonDto;
-import com.hr.entity.Applicant;
-import com.hr.entity.Person;
-import com.hr.entity.User;
-import com.hr.entity.Vacancy;
+import com.hr.entity.*;
 import com.hr.repository.PersonRepository;
 import com.hr.service.IPersonService;
-import com.hr.service.IRedmineService;
 import com.hr.service.IUserService;
 import com.hr.service.IVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +32,7 @@ public class PersonService implements IPersonService {
     @Override
     public void createPersonByApplicant(Applicant applicant) {
         Person person = new Person();
+        PersonDocument document = new PersonDocument();
 
         String[] names = applicant.getFullName().split(" ");
 
@@ -51,6 +49,9 @@ public class PersonService implements IPersonService {
         person.setSex('N');
         person.setStatus(1000);
 
+        document.setCurrentGrade(person.getGrade());
+        person.setDocument(document);
+
         repository.save(person);
     }
 
@@ -58,6 +59,8 @@ public class PersonService implements IPersonService {
     public long createPersonByPersonDto(PersonDto dto) {
 
         Person person = new Person();
+        PersonDocument document = new PersonDocument();
+
         person.setFamilyName(dto.getFamily());
         person.setFirstName(dto.getName());
         person.setLastName(dto.getFatherName());
@@ -68,6 +71,9 @@ public class PersonService implements IPersonService {
         person.setStatus(1000);
         person.setGrade(1);
         person.setEmail(dto.getEmail());
+
+        document.setCurrentGrade(person.getGrade());
+        person.setDocument(document);
 
         return repository.save(person).getID();
     }
@@ -130,6 +136,30 @@ public class PersonService implements IPersonService {
         person.setJobTitle(vacancy.getShortName());
 
         repository.save(person);
+    }
+
+    @Override
+    public void addDocumentForPerson(Long personId, AllDocumentDto dto) {
+        Person person = repository.findById(personId).get();
+        char sex = dto.getSex().toUpperCase().charAt(0);
+        PersonDocument document = person.getDocument();
+        Passport passport = new Passport();
+        SNILS snils = new SNILS();
+
+        passport.setFio(dto.getFio());
+        passport.setSex(sex);
+        passport.setBirthDay(dto.getBirthDay());
+
+        snils.setFio(dto.getFio());
+        snils.setBirthDay(dto.getBirthDay());
+        snils.setSex(dto.getSex());
+
+        document.setPassport(passport);
+        document.setSnils(snils);
+
+        person.setDocument(document);
+        repository.save(person);
+
     }
 
     /*@Override

@@ -15,8 +15,14 @@ public class PersonDocument {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    private int passport_id;
-    private int snils_id;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Passport passport;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private SNILS snils;
+
     private int insurance_id;
-    private int work_book_id;
+    private int currentGrade;
+    private long redmineId;
+
 }
