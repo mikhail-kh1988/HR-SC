@@ -80,7 +80,7 @@ create table department(
 
 );
 
-create TABLE persons_history(
+create TABLE change_history_persons(
 	id Serial PRIMARY KEY not null,
 	person_id BIGINT,
 	create_date TIMESTAMP,
@@ -144,4 +144,20 @@ create table passport(
   sex char,
   birth_day date,
   place_birth varchar(256)
+);
+
+create table company(
+  id serial primary key not null,
+  name varchar(128),
+  full_name text,
+  org_type varchar(128),
+  tax_percent int,
+  tax_payroll int
+);
+
+create table change_history_company(
+  id serial primary key not null,
+  change_by bigint,
+  history varchar(256),
+  create_date timestamp
 );
