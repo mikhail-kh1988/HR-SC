@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -24,5 +25,6 @@ public class PersonDocument {
     private int insurance_id;
     private int currentGrade;
     private long redmineId;
+    private BigDecimal salary;
 
 }

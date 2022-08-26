@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -24,8 +25,11 @@ public class Payroll {
     private LocalDate endPeriod;
     private String documentName;
     private String documentExternalId;
+    private LocalDateTime createDate;
     private BigDecimal totalSum;
     private BigDecimal tax;
     private BigDecimal actualSum;
+    private boolean sendToBank;
+    private boolean payed;
 
 }
