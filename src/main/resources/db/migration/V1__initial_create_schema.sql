@@ -48,7 +48,8 @@ create table persons_documents(
 	snils_id bigint,
 	insurance_id bigint,
 	current_grade bigint,
-	redmine_id bigint
+	redmine_id bigint,
+  	salary decimal
 );
 
 create table organisation_tier(
@@ -121,9 +122,12 @@ create table payroll(
   end_period date,
   document_name varchar(256),
   document_external_id varchar(256),
+  create_date timestamp,
   total_sum decimal,
   tax decimal,
-  actual_sum decimal
+  actual_sum decimal,
+  send_to_bank boolean,
+  payed boolean
 );
 
 create table snils(
